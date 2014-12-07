@@ -1,6 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
-    android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
+    xmlns:tools="http://schemas.android.com/tools" android:layout_width="fill_parent"
+    android:layout_height="fill_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:paddingBottom="@dimen/activity_vertical_margin" tools:context=".GameActivity">
@@ -14,7 +14,9 @@
         android:layout_alignParentStart="true"
         android:layout_alignParentBottom="false"
         android:layout_alignParentRight="false"
-        android:gravity="bottom|left|right|top">
+        android:gravity="fill_horizontal|start|fill|bottom|left|right|end|fill_vertical|top"
+        android:stretchColumns="*"
+        android:layout_alignParentEnd="true">
 
         <TableRow
             android:layout_width="fill_parent"
@@ -25,19 +27,20 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/button3"
-                android:layout_column="0" />
-
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/button"
-                android:layout_column="1" />
+                android:id="@+id/button1"
+                android:layout_column="0"
+                android:nestedScrollingEnabled="false" />
 
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/button2"
+                android:layout_column="1" />
+
+            <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/button3"
                 android:layout_column="2" />
 
         </TableRow>
@@ -45,7 +48,8 @@
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_gravity="bottom|left|right|top">
+            android:layout_gravity="bottom|left|right|top"
+            android:id="@+id/row2">
 
             <Button
                 android:layout_width="wrap_content"
@@ -66,7 +70,8 @@
         <TableRow
             android:layout_width="fill_parent"
             android:layout_height="fill_parent"
-            android:layout_gravity="bottom|left|right|top">
+            android:layout_gravity="bottom|left|right|top"
+            android:id="@+id/row3">
 
             <Button
                 android:layout_width="wrap_content"
