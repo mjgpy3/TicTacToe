@@ -9,12 +9,12 @@ import android.widget.Button;
 
 public class GameActivity extends ActionBarActivity {
 
-    private final GameUpdateManager UPDATE_MANAGER = new GameUpdateManager();
     private final Integer[] BUTTON_IDS = {
             R.id.button1, R.id.button2, R.id.button3,
             R.id.button4, R.id.button5, R.id.button6,
             R.id.button7, R.id.button8, R.id.button9
     };
+    private final GameUpdateManager UPDATE_MANAGER = new GameUpdateManager(BUTTON_IDS);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
