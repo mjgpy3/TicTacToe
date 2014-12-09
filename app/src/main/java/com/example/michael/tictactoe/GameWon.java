@@ -1,20 +1,19 @@
 package com.example.michael.tictactoe;
 
-import java.security.KeyException;
 import java.util.Map;
-import java.util.concurrent.Callable;
 
 /**
  * Created by michael on 12/8/14.
  */
-public class WinChecker {
+public class GameWon implements EndConditionChecker {
     private final Map<BoardCoordinate, String> _coordinateToValue;
 
-    public WinChecker(Map<BoardCoordinate, String> map) {
+    public GameWon(Map<BoardCoordinate, String> map) {
         _coordinateToValue = map;
     }
 
-    public Boolean hasBeenWon() {
+    @Override
+    public Boolean conditionMet() {
         for (int x = 0; x < 3; x += 1) {
             if (allAreEqual(lookup(x, 0), lookup(x, 1), lookup(x, 2))) {
                 return true;
