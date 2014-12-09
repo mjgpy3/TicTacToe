@@ -28,6 +28,10 @@ public class TicTacToeBoard {
         return _hasBeenWon;
     }
 
+    public boolean isTie() {
+        return _coordinateToValue.size() == 9;
+    }
+
     public String coordinatesValue(BoardCoordinate c) {
         return _coordinateToValue.get(c);
     }

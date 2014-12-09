@@ -4,12 +4,10 @@ import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
 
 public class GameActivity extends ActionBarActivity {
 
-    private final Integer[] BUTTON_IDS = {
+    public final Integer[] BUTTON_IDS = {
             R.id.button1, R.id.button2, R.id.button3,
             R.id.button4, R.id.button5, R.id.button6,
             R.id.button7, R.id.button8, R.id.button9
@@ -22,11 +20,13 @@ public class GameActivity extends ActionBarActivity {
 
         setContentView(R.layout.activity_game);
 
-        _updateManager = new GameUpdateManager(BUTTON_IDS, findViewById(R.id.output));
+        _updateManager = new GameUpdateManager(new GameViewInformation(BUTTON_IDS, findViewById(R.id.output)));
 
         for (Integer buttonId : BUTTON_IDS) {
             findViewById(buttonId).setOnClickListener(_updateManager);
         }
+
+        findViewById(R.id.newGame).setOnClickListener(new GameResetter(this, _updateManager));
     }
 
     @Override

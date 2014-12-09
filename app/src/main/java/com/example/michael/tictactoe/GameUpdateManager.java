@@ -11,18 +11,17 @@ import java.util.Map;
  * Created by michael on 12/7/14.
  */
 public class GameUpdateManager implements View.OnClickListener {
-    private final TicTacToeBoard board = new TicTacToeBoard();
-    private final Map<Integer, BoardCoordinate> buttonIdToCoordinate = new HashMap<Integer, BoardCoordinate>();
-    private final TextView output;
-    private boolean _gameOver = false;
+    private TicTacToeBoard board;
+    private Map<Integer, BoardCoordinate> buttonIdToCoordinate;
+    private boolean _gameOver;
+    private final TextView OUTPUT;
+    private final Integer[] BUTTON_IDS;
 
-    public GameUpdateManager(Integer[] buttonIds, View view) {
-        for (int i = 0; i < buttonIds.length; i += 1) {
-            buttonIdToCoordinate.put(buttonIds[i], new BoardCoordinate(i / 3, i % 3));
-        }
-        output = ((TextView) view);
+    public GameUpdateManager(GameViewInformation gameViewInformation) {
+        BUTTON_IDS = gameViewInformation.getButtonIds();
+        OUTPUT = gameViewInformation.getView();
 
-        displayPlayerTurnOutput();
+        initialize();
     }
 
     @Override
@@ -34,13 +33,35 @@ public class GameUpdateManager implements View.OnClickListener {
             displayPlayerTurnOutput();
 
             if (board.hasBeenWon()) {
-                _gameOver = true;
-                output.setText(board.winningPlayer() + " has won");
+                endGameWithText(board.winningPlayer() + " has won");
+            }
+
+            if (board.isTie()) {
+                endGameWithText("Tie!");
             }
         }
     }
 
-    private void displayPlayerTurnOutput() {
-        output.setText("Player " + board.currentPlayerCharacter() + "'s turn");
+    public void displayPlayerTurnOutput() {
+        OUTPUT.setText("Player " + board.currentPlayerCharacter() + "'s turn");
+    }
+
+    public void reset() {
+        initialize();
+    }
+
+    private void endGameWithText(String text) {
+        _gameOver = true;
+        OUTPUT.setText(text);
+    }
+
+    private void initialize() {
+        board = new TicTacToeBoard();
+        _gameOver = false;
+        buttonIdToCoordinate = new HashMap<Integer, BoardCoordinate>();
+        for (int i = 0; i < BUTTON_IDS.length; i += 1) {
+            buttonIdToCoordinate.put(BUTTON_IDS[i], new BoardCoordinate(i / 3, i % 3));
+        }
+        displayPlayerTurnOutput();
     }
 }
