@@ -18,8 +18,8 @@ public class GameResetter implements View.OnClickListener {
 
     @Override
     public void onClick(View _) {
-        for (int buttonid : _activity.BUTTON_IDS) {
-            ((Button) _activity.findViewById(buttonid)).setText("");
+        for (int buttonId : _activity.BUTTON_IDS) {
+            ((Button) _activity.findViewById(buttonId)).setText("");
         }
 
         _game.reset();

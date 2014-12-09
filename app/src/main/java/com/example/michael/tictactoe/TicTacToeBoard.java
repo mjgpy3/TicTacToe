@@ -16,9 +16,9 @@ public class TicTacToeBoard implements Board {
 
     @Override
     public void handleMove(BoardCoordinate boardCoordinate) {
-        if (!_coordinateToValue.containsKey(boardCoordinate)) {
-            _coordinateToValue.put(boardCoordinate, _characters.get(_characterIndex));
-            _characterIndex = (_characterIndex + 1) % _characters.size();
+        if (positionNotFilled(boardCoordinate)) {
+            addCoordinate(boardCoordinate);
+            toggleToNextCharacter();
         }
     }
 
@@ -47,4 +47,15 @@ public class TicTacToeBoard implements Board {
         return _characters.get((_characterIndex + 1) % 2);
     }
 
+    private void toggleToNextCharacter() {
+        _characterIndex = (_characterIndex + 1) % _characters.size();
+    }
+
+    private String addCoordinate(BoardCoordinate boardCoordinate) {
+        return _coordinateToValue.put(boardCoordinate, _characters.get(_characterIndex));
+    }
+
+    private boolean positionNotFilled(BoardCoordinate boardCoordinate) {
+        return !_coordinateToValue.containsKey(boardCoordinate);
+    }
 }

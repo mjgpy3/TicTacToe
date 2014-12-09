@@ -32,12 +32,12 @@ public class GameUpdateManager implements View.OnClickListener {
         }
     }
 
-    private void reset() {
+    public void reset() {
         board = new TicTacToeBoard();
         _gameOver = false;
         buttonIdToCoordinate = new HashMap<Integer, BoardCoordinate>();
         for (int i = 0; i < BUTTON_IDS.length; i += 1) {
-            buttonIdToCoordinate.put(BUTTON_IDS[i], new BoardCoordinate(i / 3, i % 3));
+            buttonIdToCoordinate.put(BUTTON_IDS[i], new BoardCoordinate(i % 3, i / 3));
         }
         displayPlayerTurnOutput();
     }
