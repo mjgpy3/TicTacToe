@@ -14,7 +14,7 @@ public class GameActivity extends ActionBarActivity {
             R.id.button4, R.id.button5, R.id.button6,
             R.id.button7, R.id.button8, R.id.button9
     };
-    private final GameUpdateManager UPDATE_MANAGER = new GameUpdateManager(BUTTON_IDS);
+    private GameUpdateManager _updateManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,8 +22,10 @@ public class GameActivity extends ActionBarActivity {
 
         setContentView(R.layout.activity_game);
 
+        _updateManager = new GameUpdateManager(BUTTON_IDS, findViewById(R.id.output));
+
         for (Integer buttonId : BUTTON_IDS) {
-            findViewById(buttonId).setOnClickListener(UPDATE_MANAGER);
+            findViewById(buttonId).setOnClickListener(_updateManager);
         }
     }
 

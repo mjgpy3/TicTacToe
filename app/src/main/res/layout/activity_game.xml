@@ -89,6 +89,20 @@
                 android:id="@+id/button9" />
         </TableRow>
 
+        <TableRow
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceSmall"
+                android:text="output goes here"
+                android:id="@+id/output"
+                android:layout_column="0"
+                android:layout_span="3" />
+        </TableRow>
+
     </TableLayout>
 
 </RelativeLayout>
