@@ -6,7 +6,8 @@ import java.util.Map;
  * Created by michael on 12/8/14.
  */
 public class GameWon implements EndConditionChecker {
-    private final Map<BoardCoordinate, String> _coordinateToValue;
+    private final Map<BoardCoordinate, String> COORDINATE_TO_VALUE;
+    private final String EMPTY_SPOT = "_";
     private final int[][][] WINNING_CASES = {
             {{0, 0}, {0, 1}, {0, 2}},
             {{1, 0}, {1, 1}, {1, 2}},
@@ -20,7 +21,7 @@ public class GameWon implements EndConditionChecker {
 
 
     public GameWon(Map<BoardCoordinate, String> map) {
-        _coordinateToValue = map;
+        COORDINATE_TO_VALUE = map;
     }
 
     @Override
@@ -34,14 +35,14 @@ public class GameWon implements EndConditionChecker {
     }
 
     private Boolean allAreEqual(String a, String b, String c) {
-        return !a.equals("_") && a.equals(b) && b.equals(c);
+        return !a.equals(EMPTY_SPOT) && a.equals(b) && b.equals(c);
     }
 
     private String lookup(int[] pair) {
         BoardCoordinate toLookup = new BoardCoordinate(pair[0], pair[1]);
-        if (_coordinateToValue.containsKey(toLookup)) {
-            return _coordinateToValue.get(toLookup);
+        if (COORDINATE_TO_VALUE.containsKey(toLookup)) {
+            return COORDINATE_TO_VALUE.get(toLookup);
         }
-        return "_";
+        return EMPTY_SPOT;
     }
 }

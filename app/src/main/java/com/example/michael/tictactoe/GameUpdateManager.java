@@ -11,11 +11,11 @@ import java.util.Map;
  * Created by michael on 12/7/14.
  */
 public class GameUpdateManager implements View.OnClickListener {
-    private Board board;
-    private Map<Integer, BoardCoordinate> buttonIdToCoordinate;
-    private boolean _gameOver;
-    private final TextView OUTPUT;
     private final Integer[] BUTTON_IDS;
+    private final TextView OUTPUT;
+    private Board _board;
+    private Map<Integer, BoardCoordinate> _buttonIdToCoordinate;
+    private boolean _gameOver;
 
     public GameUpdateManager(GameViewInformation gameViewInformation) {
         BUTTON_IDS = gameViewInformation.getButtonIds();
@@ -33,11 +33,11 @@ public class GameUpdateManager implements View.OnClickListener {
     }
 
     public void reset() {
-        board = new TicTacToeBoard();
+        _board = new TicTacToeBoard();
         _gameOver = false;
-        buttonIdToCoordinate = new HashMap<Integer, BoardCoordinate>();
+        _buttonIdToCoordinate = new HashMap<Integer, BoardCoordinate>();
         for (int i = 0; i < BUTTON_IDS.length; i += 1) {
-            buttonIdToCoordinate.put(BUTTON_IDS[i], new BoardCoordinate(i % 3, i / 3));
+            _buttonIdToCoordinate.put(BUTTON_IDS[i], new BoardCoordinate(i % 3, i / 3));
         }
         displayPlayerTurnOutput();
     }
@@ -48,13 +48,13 @@ public class GameUpdateManager implements View.OnClickListener {
     }
 
     private void displayPlayerTurnOutput() {
-        OUTPUT.setText("Player " + board.currentPlayerCharacter() + "'s turn");
+        OUTPUT.setText("Player " + _board.currentPlayerCharacter() + "'s turn");
     }
 
     private void accountForCoordinate(View button) {
-        BoardCoordinate coordinate = buttonIdToCoordinate.get(button.getId());
-        board.handleMove(coordinate);
-        ((Button) button).setText(board.coordinatesValue(coordinate));
+        BoardCoordinate coordinate = _buttonIdToCoordinate.get(button.getId());
+        _board.handleMove(coordinate);
+        ((Button) button).setText(_board.coordinatesValue(coordinate));
         displayPlayerTurnOutput();
     }
 
@@ -63,10 +63,10 @@ public class GameUpdateManager implements View.OnClickListener {
     }
 
     private void checkEndGame() {
-        if (board.hasBeenWon()) {
-            endGameWithText(board.winningPlayer() + " has won");
+        if (_board.hasBeenWon()) {
+            endGameWithText(_board.winningPlayer() + " has won");
         }
-        else if (board.isTie()) {
+        else if (_board.isTie()) {
             endGameWithText("Tie!");
         }
     }
