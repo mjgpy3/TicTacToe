@@ -1,9 +1,11 @@
 package com.example.michael.tictactoe;
 
+import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
 public class GameActivity extends ActionBarActivity {
 
@@ -13,12 +15,18 @@ public class GameActivity extends ActionBarActivity {
             R.id.button7, R.id.button8, R.id.button9
     };
     private GameUpdateManager _updateManager;
+    private boolean _intentBuilt = false;
+    private Intent SETTINGS_INTENT;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_game);
+
+        if (!_intentBuilt) {
+            SETTINGS_INTENT = new Intent(GameActivity.this, MenuActivity.class);
+        }
 
         _updateManager = new GameUpdateManager(new GameViewInformation(BUTTON_IDS, findViewById(R.id.output)));
 
@@ -27,11 +35,17 @@ public class GameActivity extends ActionBarActivity {
         }
 
         findViewById(R.id.newGame).setOnClickListener(new GameResetter(this, _updateManager));
+        findViewById(R.id.settings).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                GameActivity.this.startActivity(SETTINGS_INTENT);
+             }
+        });
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; thiss adds items to the action bar if it is present.
+        // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_game, menu);
         return true;
     }
